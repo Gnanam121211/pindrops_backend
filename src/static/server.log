@@ -1,0 +1,5 @@
+nohup: ignoring input
+127.0.0.1 - - [16/Jul/2025 02:21:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jul/2025 02:21:09] "GET /styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jul/2025 02:21:09] "GET /script.js HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jul/2025 02:21:10] "GET /favicon.ico HTTP/1.1" 200 -

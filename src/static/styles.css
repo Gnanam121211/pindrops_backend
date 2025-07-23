@@ -1,0 +1,1034 @@
+/* Custom CSS for Pindrops Website */
+
+/* Keyframe Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+    to { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+}
+
+@keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes bounce-slow {
+    0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+    40%, 43% { transform: translate3d(0, -30px, 0); }
+    70% { transform: translate3d(0, -15px, 0); }
+    90% { transform: translate3d(0, -4px, 0); }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Enhanced Background patterns */
+.candlestick-pattern {
+    position: absolute;
+    width: 3px;
+    border-radius: 1px;
+    opacity: 0.15;
+    animation: candlestickFloat 12s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.candlestick-pattern.bullish {
+    background: linear-gradient(to bottom, #10b981 0%, #059669 50%, #10b981 100%);
+    animation: candlestickBullish 15s ease-in-out infinite;
+}
+
+.candlestick-pattern.bearish {
+    background: linear-gradient(to bottom, #ef4444 0%, #dc2626 50%, #ef4444 100%);
+    animation: candlestickBearish 18s ease-in-out infinite;
+}
+
+.candlestick-pattern::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 10px;
+    background: inherit;
+    opacity: 0.8;
+}
+
+.candlestick-pattern::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 10px;
+    background: inherit;
+    opacity: 0.8;
+}
+
+.floating-element {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1), transparent);
+    animation: floatingOrb 15s ease-in-out infinite;
+}
+
+.floating-element.crypto-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(59, 130, 246, 0.3);
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.05), transparent);
+    border: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+/* Advanced candlestick chart background */
+.chart-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridPulse 20s ease-in-out infinite;
+}
+
+/* Price ticker animation */
+.price-ticker {
+    position: absolute;
+    top: 20%;
+    left: -100px;
+    font-size: 14px;
+    color: rgba(16, 185, 129, 0.4);
+    font-weight: bold;
+    animation: tickerScroll 25s linear infinite;
+}
+
+.price-ticker.red {
+    color: rgba(239, 68, 68, 0.4);
+}
+
+/* Market depth visualization */
+.market-depth {
+    position: absolute;
+    width: 100px;
+    height: 200px;
+    background: linear-gradient(to right, 
+        rgba(16, 185, 129, 0.1) 0%, 
+        rgba(16, 185, 129, 0.05) 50%, 
+        rgba(239, 68, 68, 0.05) 50%, 
+        rgba(239, 68, 68, 0.1) 100%);
+    animation: depthPulse 8s ease-in-out infinite;
+    border-radius: 4px;
+}
+
+/* Gradient text effects */
+.gradient-text {
+    background: linear-gradient(135deg, #3b82f6, #06b6d4, #3b82f6);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Card hover effects */
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Button effects */
+.btn-glow {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-glow:hover::before {
+    left: 100%;
+}
+
+/* Loading animations */
+.loading-dots {
+    display: inline-block;
+}
+
+.loading-dots::after {
+    content: '';
+    animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
+/* Chart container styling */
+.chart-container {
+    position: relative;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #334155;
+}
+
+/* Signal card animations */
+.signal-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.signal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.signal-card:hover::before {
+    transform: scaleX(1);
+}
+
+.signal-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.125rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* Utility classes */
+.text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.backdrop-blur-custom {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Price change indicators */
+.price-up {
+    color: #10b981;
+}
+
+.price-down {
+    color: #ef4444;
+}
+
+.price-neutral {
+    color: #6b7280;
+}
+
+/* Table styling */
+.crypto-table tr:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.crypto-table td {
+    border-bottom: 1px solid #334155;
+}
+
+/* Loading states */
+.skeleton {
+    background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Focus states for accessibility */
+button:focus,
+a:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none;
+    }
+}
+
+
+/* Enhanced Keyframe Animations */
+@keyframes candlestickFloat {
+    0%, 100% { 
+        transform: translateY(0px) scale(1); 
+        opacity: 0.15;
+    }
+    25% { 
+        transform: translateY(-30px) scale(1.1); 
+        opacity: 0.25;
+    }
+    50% { 
+        transform: translateY(-15px) scale(0.9); 
+        opacity: 0.2;
+    }
+    75% { 
+        transform: translateY(-40px) scale(1.05); 
+        opacity: 0.3;
+    }
+}
+
+@keyframes candlestickBullish {
+    0%, 100% { 
+        transform: translateY(0px) rotateZ(0deg); 
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+    33% { 
+        transform: translateY(-25px) rotateZ(2deg); 
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+    }
+    66% { 
+        transform: translateY(-10px) rotateZ(-1deg); 
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+}
+
+@keyframes candlestickBearish {
+    0%, 100% { 
+        transform: translateY(0px) rotateZ(0deg); 
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+    }
+    33% { 
+        transform: translateY(-20px) rotateZ(-2deg); 
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+    }
+    66% { 
+        transform: translateY(-35px) rotateZ(1deg); 
+        box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+    }
+}
+
+@keyframes floatingOrb {
+    0%, 100% { 
+        transform: translateY(0px) translateX(0px) scale(1); 
+        opacity: 0.1;
+    }
+    25% { 
+        transform: translateY(-20px) translateX(10px) scale(1.2); 
+        opacity: 0.2;
+    }
+    50% { 
+        transform: translateY(-40px) translateX(-5px) scale(0.8); 
+        opacity: 0.15;
+    }
+    75% { 
+        transform: translateY(-10px) translateX(-15px) scale(1.1); 
+        opacity: 0.25;
+    }
+}
+
+@keyframes gridPulse {
+    0%, 100% { 
+        opacity: 0.05; 
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 0.1; 
+        transform: scale(1.02);
+    }
+}
+
+@keyframes tickerScroll {
+    0% { 
+        left: -100px; 
+        opacity: 0;
+    }
+    10% { 
+        opacity: 1;
+    }
+    90% { 
+        opacity: 1;
+    }
+    100% { 
+        left: 100vw; 
+        opacity: 0;
+    }
+}
+
+@keyframes depthPulse {
+    0%, 100% { 
+        opacity: 0.1; 
+        transform: scaleY(1);
+    }
+    50% { 
+        opacity: 0.3; 
+        transform: scaleY(1.2);
+    }
+}
+
+@keyframes volumeBar {
+    0%, 100% { 
+        height: 20px; 
+        opacity: 0.2;
+    }
+    50% { 
+        height: 60px; 
+        opacity: 0.6;
+    }
+}
+
+@keyframes priceWave {
+    0% { 
+        transform: translateX(-100%) scaleY(1);
+    }
+    50% { 
+        transform: translateX(50vw) scaleY(1.5);
+    }
+    100% { 
+        transform: translateX(100vw) scaleY(1);
+    }
+}
+
+/* Volume bars animation */
+.volume-bar {
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to top, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0.1));
+    animation: volumeBar 6s ease-in-out infinite;
+    border-radius: 2px;
+}
+
+/* Price wave effect */
+.price-wave {
+    position: absolute;
+    width: 2px;
+    height: 100vh;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(16, 185, 129, 0.2) 20%, 
+        rgba(16, 185, 129, 0.4) 50%, 
+        rgba(16, 185, 129, 0.2) 80%, 
+        transparent 100%);
+    animation: priceWave 30s linear infinite;
+}
+
+/* Enhanced glow effects */
+.glow-green {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    animation: glowGreen 3s ease-in-out infinite alternate;
+}
+
+.glow-red {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+    animation: glowRed 3s ease-in-out infinite alternate;
+}
+
+@keyframes glowGreen {
+    from { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+    to { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); }
+}
+
+@keyframes glowRed {
+    from { box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); }
+    to { box-shadow: 0 0 40px rgba(239, 68, 68, 0.6); }
+}
+
+/* Particle system */
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(59, 130, 246, 0.6);
+    border-radius: 50%;
+    animation: particleFloat 20s linear infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) translateX(0px) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100px) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Trading signals animation */
+.signal-pulse {
+    animation: signalPulse 2s ease-in-out infinite;
+}
+
+@keyframes signalPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+/* Market sentiment indicator */
+.sentiment-indicator {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        rgba(239, 68, 68, 0.3) 0deg,
+        rgba(245, 158, 11, 0.3) 120deg,
+        rgba(16, 185, 129, 0.3) 240deg,
+        rgba(239, 68, 68, 0.3) 360deg
+    );
+    animation: sentimentSpin 15s linear infinite;
+}
+
+@keyframes sentimentSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+/* Additional Advanced Background Animations */
+
+/* Animated trading lines */
+.trading-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(59, 130, 246, 0.6) 20%, 
+        rgba(16, 185, 129, 0.8) 50%, 
+        rgba(59, 130, 246, 0.6) 80%, 
+        transparent 100%);
+    animation: tradingLineSweep 8s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+.trading-line.diagonal {
+    transform: rotate(45deg);
+    animation: diagonalSweep 12s ease-in-out infinite;
+}
+
+.trading-line.vertical {
+    width: 2px;
+    height: 100vh;
+    background: linear-gradient(to bottom, 
+        transparent 0%, 
+        rgba(16, 185, 129, 0.6) 20%, 
+        rgba(59, 130, 246, 0.8) 50%, 
+        rgba(16, 185, 129, 0.6) 80%, 
+        transparent 100%);
+    animation: verticalPulse 10s ease-in-out infinite;
+}
+
+/* Floating geometric shapes */
+.geometric-shape {
+    position: absolute;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: rgba(59, 130, 246, 0.05);
+    animation: geometricFloat 15s ease-in-out infinite;
+}
+
+.geometric-shape.triangle {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 25px solid rgba(16, 185, 129, 0.2);
+    background: none;
+    animation: triangleRotate 20s linear infinite;
+}
+
+.geometric-shape.diamond {
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    background: linear-gradient(45deg, 
+        rgba(245, 158, 11, 0.2), 
+        rgba(239, 68, 68, 0.2));
+    animation: diamondSpin 18s ease-in-out infinite;
+}
+
+.geometric-shape.hexagon {
+    width: 30px;
+    height: 17px;
+    background: rgba(139, 92, 246, 0.2);
+    position: relative;
+    animation: hexagonPulse 14s ease-in-out infinite;
+}
+
+.geometric-shape.hexagon:before,
+.geometric-shape.hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+}
+
+.geometric-shape.hexagon:before {
+    bottom: 100%;
+    border-bottom: 8px solid rgba(139, 92, 246, 0.2);
+}
+
+.geometric-shape.hexagon:after {
+    top: 100%;
+    border-top: 8px solid rgba(139, 92, 246, 0.2);
+}
+
+/* Matrix-style digital rain */
+.digital-rain {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: rgba(16, 185, 129, 0.4);
+    animation: digitalFall 15s linear infinite;
+    text-shadow: 0 0 5px rgba(16, 185, 129, 0.6);
+}
+
+/* Animated network connections */
+.network-node {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(59, 130, 246, 0.6);
+    border-radius: 50%;
+    animation: nodePulse 4s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+.network-connection {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        rgba(59, 130, 246, 0.6), 
+        rgba(59, 130, 246, 0.2), 
+        rgba(59, 130, 246, 0.6));
+    animation: connectionPulse 6s ease-in-out infinite;
+    transform-origin: left center;
+}
+
+/* Holographic effects */
+.hologram-grid {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: 
+        linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: hologramShift 12s ease-in-out infinite;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    transform: perspective(500px) rotateX(45deg);
+}
+
+/* Floating data streams */
+.data-stream {
+    position: absolute;
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom,
+        rgba(16, 185, 129, 0.8),
+        rgba(16, 185, 129, 0.4),
+        transparent);
+    animation: dataFlow 8s linear infinite;
+}
+
+.data-stream.binary {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: rgba(16, 185, 129, 0.6);
+    width: auto;
+    height: auto;
+    background: none;
+    animation: binaryScroll 12s linear infinite;
+}
+
+/* Pulsing energy orbs */
+.energy-orb {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(59, 130, 246, 0.4) 0%,
+        rgba(59, 130, 246, 0.2) 40%,
+        rgba(59, 130, 246, 0.1) 70%,
+        transparent 100%);
+    animation: orbPulse 6s ease-in-out infinite;
+    box-shadow: 
+        0 0 20px rgba(59, 130, 246, 0.3),
+        inset 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.energy-orb.large {
+    width: 80px;
+    height: 80px;
+    animation: largePulse 10s ease-in-out infinite;
+}
+
+/* Animated circuit patterns */
+.circuit-pattern {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,10 L90,10 L90,50 L50,50 L50,90 L10,90 Z" fill="none" stroke="rgba(59,130,246,0.3)" stroke-width="1"/><circle cx="10" cy="10" r="2" fill="rgba(59,130,246,0.5)"/><circle cx="90" cy="10" r="2" fill="rgba(59,130,246,0.5)"/><circle cx="50" cy="50" r="2" fill="rgba(59,130,246,0.5)"/></svg>') no-repeat center;
+    background-size: contain;
+    animation: circuitGlow 8s ease-in-out infinite;
+    opacity: 0.3;
+}
+
+/* Keyframe animations for new elements */
+@keyframes tradingLineSweep {
+    0%, 100% { 
+        transform: translateX(-100vw) scaleX(0.5); 
+        opacity: 0;
+    }
+    50% { 
+        transform: translateX(50vw) scaleX(1); 
+        opacity: 1;
+    }
+}
+
+@keyframes diagonalSweep {
+    0%, 100% { 
+        transform: rotate(45deg) translateX(-100px); 
+        opacity: 0;
+    }
+    50% { 
+        transform: rotate(45deg) translateX(100px); 
+        opacity: 0.8;
+    }
+}
+
+@keyframes verticalPulse {
+    0%, 100% { 
+        opacity: 0.2; 
+        transform: scaleY(0.8);
+    }
+    50% { 
+        opacity: 0.6; 
+        transform: scaleY(1.2);
+    }
+}
+
+@keyframes geometricFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.3;
+    }
+    33% { 
+        transform: translateY(-30px) rotate(120deg); 
+        opacity: 0.6;
+    }
+    66% { 
+        transform: translateY(-15px) rotate(240deg); 
+        opacity: 0.4;
+    }
+}
+
+@keyframes triangleRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes diamondSpin {
+    0%, 100% { 
+        transform: rotate(45deg) scale(1); 
+        opacity: 0.4;
+    }
+    50% { 
+        transform: rotate(225deg) scale(1.2); 
+        opacity: 0.8;
+    }
+}
+
+@keyframes hexagonPulse {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg); 
+        opacity: 0.3;
+    }
+    50% { 
+        transform: scale(1.3) rotate(180deg); 
+        opacity: 0.7;
+    }
+}
+
+@keyframes digitalFall {
+    0% { 
+        transform: translateY(-100px); 
+        opacity: 0;
+    }
+    10% { 
+        opacity: 1;
+    }
+    90% { 
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(100vh); 
+        opacity: 0;
+    }
+}
+
+@keyframes nodePulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 0.6;
+    }
+    50% { 
+        transform: scale(1.5); 
+        opacity: 1;
+    }
+}
+
+@keyframes connectionPulse {
+    0%, 100% { 
+        opacity: 0.2; 
+        transform: scaleX(0.8);
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: scaleX(1.2);
+    }
+}
+
+@keyframes hologramShift {
+    0%, 100% { 
+        transform: perspective(500px) rotateX(45deg) rotateY(0deg); 
+        opacity: 0.3;
+    }
+    50% { 
+        transform: perspective(500px) rotateX(45deg) rotateY(180deg); 
+        opacity: 0.6;
+    }
+}
+
+@keyframes dataFlow {
+    0% { 
+        transform: translateY(100vh); 
+        opacity: 0;
+    }
+    10% { 
+        opacity: 1;
+    }
+    90% { 
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(-100px); 
+        opacity: 0;
+    }
+}
+
+@keyframes binaryScroll {
+    0% { 
+        transform: translateY(100vh); 
+        opacity: 0;
+    }
+    10% { 
+        opacity: 0.8;
+    }
+    90% { 
+        opacity: 0.8;
+    }
+    100% { 
+        transform: translateY(-50px); 
+        opacity: 0;
+    }
+}
+
+@keyframes orbPulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 0.4;
+    }
+    50% { 
+        transform: scale(1.3); 
+        opacity: 0.8;
+    }
+}
+
+@keyframes largePulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 0.2;
+    }
+    50% { 
+        transform: scale(1.5); 
+        opacity: 0.6;
+    }
+}
+
+@keyframes circuitGlow {
+    0%, 100% { 
+        opacity: 0.2; 
+        filter: brightness(1);
+    }
+    50% { 
+        opacity: 0.6; 
+        filter: brightness(1.5);
+    }
+}
+
+/* Animated background waves */
+.wave-layer {
+    position: absolute;
+    width: 200%;
+    height: 100px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(59, 130, 246, 0.1) 25%,
+        rgba(16, 185, 129, 0.1) 50%,
+        rgba(59, 130, 246, 0.1) 75%,
+        transparent 100%);
+    animation: waveMove 20s ease-in-out infinite;
+    clip-path: polygon(0 50%, 100% 30%, 100% 70%, 0 90%);
+}
+
+.wave-layer.wave2 {
+    animation: waveMove2 25s ease-in-out infinite reverse;
+    opacity: 0.5;
+}
+
+.wave-layer.wave3 {
+    animation: waveMove3 30s ease-in-out infinite;
+    opacity: 0.3;
+}
+
+@keyframes waveMove {
+    0%, 100% { transform: translateX(-50%) translateY(0px); }
+    50% { transform: translateX(-50%) translateY(-20px); }
+}
+
+@keyframes waveMove2 {
+    0%, 100% { transform: translateX(-50%) translateY(10px); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+@keyframes waveMove3 {
+    0%, 100% { transform: translateX(-50%) translateY(-5px); }
+    50% { transform: translateX(-50%) translateY(15px); }
+}
+
+/* Glitch effects */
+.glitch-element {
+    position: absolute;
+    color: rgba(0, 255, 255, 0.6);
+    font-family: 'Courier New', monospace;
+    animation: glitch 3s ease-in-out infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { 
+        transform: translate(0); 
+        opacity: 1;
+    }
+    20% { 
+        transform: translate(-2px, 2px); 
+        opacity: 0.8;
+    }
+    40% { 
+        transform: translate(-2px, -2px); 
+        opacity: 0.9;
+    }
+    60% { 
+        transform: translate(2px, 2px); 
+        opacity: 0.7;
+    }
+    80% { 
+        transform: translate(2px, -2px); 
+        opacity: 0.8;
+    }
+}
+

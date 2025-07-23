@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pindrops - Crypto Trading Platform</title>
+    <meta name="description" content="Professional crypto trading platform with real-time data, advanced charts, and trading signals">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Chart.js for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                            600: '#475569',
+                            500: '#64748b',
+                            400: '#94a3b8',
+                            300: '#cbd5e1',
+                            200: '#e2e8f0',
+                            100: '#f1f5f9',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'fade-in': 'fadeIn 0.5s ease-in',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-slate-900 text-white">
+    <!-- Background Elements -->
+    <div id="candlestick-background" class="fixed inset-0 z-0 opacity-10"></div>
+    <div id="floating-elements" class="fixed inset-0 z-0 pointer-events-none"></div>
+    
+    <!-- Main Content -->
+    <div class="relative z-10">
+        <!-- Header -->
+        <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Pindrops</span>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex items-center space-x-8">
+                        <a href="#dashboard" class="text-gray-300 hover:text-white transition-colors">Dashboard</a>
+                        <a href="#markets" class="text-gray-300 hover:text-white transition-colors">Markets</a>
+                        <a href="#signals" class="text-gray-300 hover:text-white transition-colors">Signals</a>
+                        <a href="#analysis" class="text-gray-300 hover:text-white transition-colors">Analysis</a>
+                        <a href="#education" class="text-gray-300 hover:text-white transition-colors">Education</a>
+                    </nav>
+
+                    <!-- Social Links & CTA -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="https://twitter.com/pindropsX" target="_blank" rel="noopener noreferrer" 
+                           class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://t.me/pindropsbot" target="_blank" rel="noopener noreferrer"
+                           class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        </a>
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                            Get Started
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div id="mobile-menu" class="md:hidden py-4 border-t border-slate-800 hidden">
+                    <nav class="flex flex-col space-y-4">
+                        <a href="#dashboard" class="text-gray-300 hover:text-white transition-colors">Dashboard</a>
+                        <a href="#markets" class="text-gray-300 hover:text-white transition-colors">Markets</a>
+                        <a href="#signals" class="text-gray-300 hover:text-white transition-colors">Signals</a>
+                        <a href="#analysis" class="text-gray-300 hover:text-white transition-colors">Analysis</a>
+                        <a href="#education" class="text-gray-300 hover:text-white transition-colors">Education</a>
+                        <div class="flex items-center space-x-4 pt-4">
+                            <a href="https://twitter.com/pindropsX" target="_blank" rel="noopener noreferrer"
+                               class="text-gray-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://t.me/pindropsbot" target="_blank" rel="noopener noreferrer"
+                               class="text-gray-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            </a>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+                                Get Started
+                            </button>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="hero" class="relative py-20 px-4 overflow-hidden">
+            <div class="container mx-auto text-center">
+                <div class="animate-slide-up">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-600 bg-clip-text text-transparent">
+                        Trade Crypto Like a Pro
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                        Advanced trading platform with real-time data, professional charts, and expert signals
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
+                            Start Trading Now
+                        </button>
+                        <button class="border border-gray-600 hover:border-gray-400 text-gray-300 hover:text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all">
+                            View Live Demo
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Animated Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
+                    <div class="text-center animate-fade-in">
+                        <div class="text-3xl font-bold text-blue-400" data-counter="50000">0</div>
+                        <div class="text-gray-400">Active Traders</div>
+                    </div>
+                    <div class="text-center animate-fade-in">
+                        <div class="text-3xl font-bold text-green-400" data-counter="1200">0</div>
+                        <div class="text-gray-400">Trading Pairs</div>
+                    </div>
+                    <div class="text-center animate-fade-in">
+                        <div class="text-3xl font-bold text-yellow-400" data-counter="99">0</div>
+                        <div class="text-gray-400">Uptime %</div>
+                    </div>
+                    <div class="text-center animate-fade-in">
+                        <div class="text-3xl font-bold text-purple-400" data-counter="24">0</div>
+                        <div class="text-gray-400">24/7 Support</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Market Overview Section -->
+        <section id="markets" class="py-16 px-4 bg-slate-800/50">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Live Market Overview</h2>
+                
+                <!-- Market Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">Market Cap</h3>
+                            <i data-lucide="trending-up" class="w-5 h-5 text-green-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-green-400" id="market-cap">$2.1T</div>
+                        <div class="text-sm text-gray-400">+2.4% (24h)</div>
+                    </div>
+                    
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">24h Volume</h3>
+                            <i data-lucide="bar-chart-3" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-blue-400" id="volume-24h">$89.2B</div>
+                        <div class="text-sm text-gray-400">+5.1% (24h)</div>
+                    </div>
+                    
+                    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">BTC Dominance</h3>
+                            <i data-lucide="pie-chart" class="w-5 h-5 text-yellow-400"></i>
+                        </div>
+                        <div class="text-2xl font-bold text-yellow-400" id="btc-dominance">54.2%</div>
+                        <div class="text-sm text-gray-400">-0.8% (24h)</div>
+                    </div>
+                </div>
+
+                <!-- Top Cryptocurrencies Table -->
+                <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                    <div class="p-6 border-b border-slate-700">
+                        <h3 class="text-xl font-semibold">Top Cryptocurrencies</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-slate-700">
+                                <tr>
+                                    <th class="text-left p-4">#</th>
+                                    <th class="text-left p-4">Name</th>
+                                    <th class="text-left p-4">Price</th>
+                                    <th class="text-left p-4">24h %</th>
+                                    <th class="text-left p-4">Market Cap</th>
+                                    <th class="text-left p-4">Volume (24h)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="crypto-table">
+                                <!-- Dynamic content will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chart Section -->
+        <section id="analysis" class="py-16 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Advanced Trading Charts</h2>
+                
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <h3 class="text-xl font-semibold mb-4 md:mb-0">BTC/USDT</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="chart-timeframe bg-blue-600 text-white px-3 py-1 rounded text-sm" data-timeframe="1h">1H</button>
+                            <button class="chart-timeframe bg-slate-700 text-gray-300 px-3 py-1 rounded text-sm" data-timeframe="4h">4H</button>
+                            <button class="chart-timeframe bg-slate-700 text-gray-300 px-3 py-1 rounded text-sm" data-timeframe="1d">1D</button>
+                            <button class="chart-timeframe bg-slate-700 text-gray-300 px-3 py-1 rounded text-sm" data-timeframe="1w">1W</button>
+                        </div>
+                    </div>
+                    <div class="h-96">
+                        <canvas id="trading-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Telegram Signals Section -->
+        <section id="signals" class="py-16 px-4 bg-slate-800/50">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Latest Trading Signals</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Signal Cards will be dynamically generated -->
+                    <div class="signal-card bg-slate-800 rounded-xl border border-slate-700 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-semibold">BUY</span>
+                            <span class="text-gray-400 text-sm">2 hours ago</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">BTC/USDT</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Entry:</span>
+                                <span class="text-white">$43,250</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Target:</span>
+                                <span class="text-green-400">$45,800</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Stop Loss:</span>
+                                <span class="text-red-400">$42,100</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-700">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-400 text-sm">Accuracy</span>
+                                <span class="text-green-400 font-semibold">87%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="https://t.me/pindropsbot" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        <span>Join Telegram for More Signals</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-slate-900 border-t border-slate-800 py-12 px-4">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                                <i data-lucide="trending-up" class="w-5 h-5 text-white"></i>
+                            </div>
+                            <span class="text-xl font-bold text-white">Pindrops</span>
+                        </div>
+                        <p class="text-gray-400 mb-4">Professional crypto trading platform for traders of all levels.</p>
+                        <div class="flex space-x-4">
+                            <a href="https://twitter.com/pindropsX" target="_blank" rel="noopener noreferrer"
+                               class="text-gray-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://t.me/pindropsbot" target="_blank" rel="noopener noreferrer"
+                               class="text-gray-400 hover:text-blue-400 transition-colors">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Platform</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors">Dashboard</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Markets</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Trading</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Portfolio</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Resources</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors">Education</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">API Docs</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Support</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-white font-semibold mb-4">Company</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-slate-800 mt-8 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 Pindrops. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+
